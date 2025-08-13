@@ -4,15 +4,18 @@
 #include "editor.h"
 
 void init_editor(Editor *e) {
-    e->num_lines = 0;
+    e->num_lines = 1;
     e->cursor_x = 0;
     e->cursor_y = 0;
     e->mode = NORMAL;
+    e->buffer[0][0] = '\0';
 }
 
 void insert_char(Editor *e, char c) {
+    if (e->cursor_y >= e->num_lines) return; // safety check
     char *line = e->buffer[e->cursor_y];
     int len = strlen(line);
+    if (len >= MAX_LINE_LEN - 1) return; // avoid overflow
     memmove(&line[e->cursor_x + 1], &line[e->cursor_x], len - e->cursor_x + 1);
     line[e->cursor_x] = c;
     e->cursor_x++;

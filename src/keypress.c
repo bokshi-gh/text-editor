@@ -4,17 +4,18 @@
 #include "editor.h"
 
 void process_keypress(Editor *e, char c){
+	// backspace and newline
+	// command mode, visual mode, normal mode, insert mode
 	switch (e->mode) {
 		case NORMAL:
 			if(c == 'i') e->mode = INSERT;
+			else if(c == 'q') exit(0);
 		        break;
 		case INSERT:
 			if(c == 27) e->mode = NORMAL;
 			else{
-				e->buffer[e->cursor_x][e->cursor_y] = c;
+				insert_char(e, c);
 			}
 			break;
-		case 'q':
-			exit(0);
 	}
 }
