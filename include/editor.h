@@ -3,7 +3,7 @@
 #define MAX_LINES 1000
 #define MAX_LINE_LEN 1024
 
-enum Mode { NORMAL, INSERT };
+enum Mode { NORMAL, INSERT, COMMAND, VISUAL };
 
 typedef struct {
 	char buffer[MAX_LINES][MAX_LINE_LEN];
