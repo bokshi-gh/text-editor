@@ -21,11 +21,18 @@ void insert_char(Editor *e, char c) {
     e->cursor_x++;
 }
 
-void backspace(Editor *e) {
+void backspace_insert_mode(Editor *e) {
     if (e->cursor_x == 0) return;
     char *line = e->buffer[e->cursor_y];
     int len = strlen(line);
     memmove(&line[e->cursor_x - 1], &line[e->cursor_x], len - e->cursor_x + 1);
+    e->cursor_x--;
+}
+
+void backspace_normal_mode(Editor *e) {
+    if (e->cursor_x == 0) return;
+    char *line = e->buffer[e->cursor_y];
+    int len = strlen(line);
     e->cursor_x--;
 }
 

@@ -15,6 +15,7 @@ typedef struct {
 
 void init_editor(Editor *e);
 void insert_char(Editor *e, char c);
-void backspace(Editor *e);
+void backspace_insert_mode(Editor *e);
+void backspace_normal_mode(Editor *e);
 void newline(Editor *e);
 void refresh_screen(Editor *e);
