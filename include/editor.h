@@ -4,6 +4,7 @@
 #define MAX_LINE_LEN 1024
 
 enum Mode { NORMAL, INSERT, COMMAND, VISUAL };
+enum Key { KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT };
 
 typedef struct {
 	char buffer[MAX_LINES][MAX_LINE_LEN];
@@ -19,3 +20,4 @@ void backspace_insert_mode(Editor *e);
 void backspace_normal_mode(Editor *e);
 void newline(Editor *e);
 void refresh_screen(Editor *e);
+void arrow_key_handler(Editor *e, enum Key);

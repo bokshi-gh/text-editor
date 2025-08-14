@@ -60,3 +60,19 @@ void refresh_screen(Editor *e) {
     write(STDOUT_FILENO, buf, strlen(buf));
 }
 
+void arrow_key_handler(Editor *e, enum Key k){
+	switch (k) {
+		case KEY_UP:
+			e->cursor_y--;
+			break;
+		case KEY_DOWN:
+			e->cursor_y++;
+			break;
+		case KEY_RIGHT:
+			e->cursor_x++;
+			break;
+		case KEY_LEFT:
+			e->cursor_x--;
+			break;
+	}
+}

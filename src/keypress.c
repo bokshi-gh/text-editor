@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include "keypress.h"
@@ -19,7 +20,31 @@ void process_keypress(Editor *e, char c){
 			else if(c == 127) backspace_normal_mode(e);
 		        break;
 		case INSERT:
-			if(c == 27) e->mode = NORMAL;
+			if(c == 27){
+				char seq[2];
+				if(read(STDIN_FILENO, &seq[0], 1) == 0) return;
+				if(read(STDIN_FILENO, &seq[1], 1) == 0) return;
+
+				if(seq[0] == '['){
+					switch (seq[1]) {
+						case 'A':
+							arrow_key_handler(e, KEY_UP);
+							break;
+						case 'B':
+							arrow_key_handler(e, KEY_DOWN);
+							break;
+						case 'C':
+							arrow_key_handler(e, KEY_RIGHT);
+							break;
+						case 'D':
+							arrow_key_handler(e, KEY_LEFT);
+							break;
+
+
+					}
+				}
+				else e->mode = NORMAL;
+			}
 			if(c == 127) backspace_insert_mode(e);
 			else{
 				insert_char(e, c);
