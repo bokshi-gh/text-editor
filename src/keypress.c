@@ -14,6 +14,8 @@ void process_keypress(Editor *e, char c){
 			if(c == 'i') e->mode = INSERT;
 			else if(c == 'q'){
 				memset(e->buffer, 0, sizeof(e->buffer));
+				e->cursor_x = 0;
+				e->cursor_y = 0;
 				refresh_screen(e);
 				exit(0);
 			}
