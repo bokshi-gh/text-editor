@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <termios.h>
 #include <unistd.h>
-#include "termios_config.h"
+#include "termios.h"
 
 struct termios orig_termios;
 
