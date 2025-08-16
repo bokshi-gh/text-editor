@@ -12,7 +12,7 @@ struct Editor{
 	int cursor_x;
 	int cursor_y;
 	enum Mode mode;
-} e;
+};
 
 void init_editor();
 void insert_char(Editor *e, char c);
