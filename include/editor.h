@@ -6,15 +6,15 @@
 enum Mode { NORMAL, INSERT, COMMAND, VISUAL };
 enum Key { KEY_UP, KEY_DOWN, KEY_RIGHT, KEY_LEFT };
 
-typedef struct {
+struct Editor{
 	char buffer[MAX_LINES][MAX_LINE_LEN];
 	int num_lines;
 	int cursor_x;
 	int cursor_y;
 	enum Mode mode;
-} Editor;
+} e;
 
-void init_editor(Editor *e);
+void init_editor();
 void insert_char(Editor *e, char c);
 void backspace_insert_mode(Editor *e);
 void backspace_normal_mode(Editor *e);
