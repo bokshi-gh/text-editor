@@ -1,6 +1,4 @@
-#include <termios.h>
-#include <unistd.h>
-#include "termios_config.h"
+#include "termios.h"
 #include "editor.h"
 #include "keypress.h"
 
