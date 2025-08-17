@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <dirent.h>
 #include "editor.h"
 
 void process_keypress(Editor *e, char c){
@@ -10,6 +11,11 @@ void process_keypress(Editor *e, char c){
                 e->mode = INSERT;
             }
             else if(c == 'q'){
+		if(sizeof(e->old_buffer) != 0){
+					memcpy(e->buffer, e->old_buffer, sizeof(e->old_buffer));
+					memset(e->old_buffer, 0, sizeof(e->old_buffer));
+					return;
+		}
                 memset(e->buffer, 0, sizeof(e->buffer));
                 e->cursor_x = 0;
                 e->cursor_y = 0;
@@ -50,6 +56,23 @@ void process_keypress(Editor *e, char c){
                     }
                 }
             }
+	    else if(c == 'e'){
+				DIR *d;
+				struct dirent *dir;
+
+				d = opendir(".");
+				if(d) {
+					e->num_lines = 0;
+					memcpy(e->old_buffer, e->buffer, sizeof(e->buffer));
+					memset(e->buffer, 0, sizeof(e->buffer));
+					int i = 0;
+					while ((dir = readdir(d)) != NULL) {
+						memcpy(e->buffer[i++], dir->d_name, sizeof(dir->d_name));
+						e->num_lines++;
+					}
+				}
+				closedir(d);
+	    }
             else if(c == 8 || c == 127) backspace_normal_mode(e);
             else if(c == 13) newline_normal_mode(e);
             else if(c == 8 || c == 127) backspace_normal_mode(e);
