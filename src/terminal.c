@@ -46,3 +46,7 @@ void disableAlternateBuffer(){
 	clearTerminal();
 	write(STDOUT_FILENO, "\x1b[?1049l", 8);
 }
+
+void moveCursor(CursorMovementPosition position){
+
+}
