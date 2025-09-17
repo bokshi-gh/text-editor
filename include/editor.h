@@ -10,10 +10,11 @@ typedef enum {
 } EditorMode ;
 
 typedef struct {
-	int x;
-	int y;
+	int row;
+	int column;
 	char *buffer[COLUMN_SIZE];
 	EditorMode mode;
 } Editor;
 
 Editor initEditor();
+void renderBuffer(Editor *editor);

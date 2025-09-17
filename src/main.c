@@ -17,15 +17,12 @@ int main(void) {
     char c;
     while (1) {
 	clearTerminal();
-	moveCursor(HOME);
 	
-	for (int i = 0; i < COLUMN_SIZE; i++) {
-			char *row = editor.buffer[i];
-			if(row){
-				write(STDOUT_FILENO, row, ROW_SIZE);
-				write(STDOUT_FILENO, "\n", 1);
-			}
-	}
+	renderBuffer(&editor);
+	moveCursor(HOME);
+	char cursor[100];
+	sprintf(cursor, "\x1b[%d;%dH", editor.row, editor.column);
+	write(STDOUT_FILENO, cursor, 6);
 
         int n = read(STDIN_FILENO, &c, 1);
 
