@@ -3,7 +3,7 @@
 #include <termios.h>
 #include <stdio.h>
 
-#include "terminal.h"
+#include "../include/terminal.h"
 
 static struct termios orig_termios;
 
@@ -34,14 +34,15 @@ void enableRawMode(void) {
     }
 }
 
+void clearTerminal(){
+	write(STDOUT_FILENO, "\x1b[2J", 4);
+}
+
 void enableAlternateBuffer(){
 	write(STDOUT_FILENO, "\x1b[?1049h", 8);
 }
 
 void disableAlternateBuffer(){
+	clearTerminal();
 	write(STDOUT_FILENO, "\x1b[?1049l", 8);
-}
-
-void clearTerminal(){
-	write(STDOUT_FILENO, "\x1b[2J", 4);
 }

@@ -2,11 +2,15 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdlib.h>
-#include "terminal.h"
+#include "../include/terminal.h"
+#include "../include/editor.h"
+#include "../include/keypress.h"
 
 int main(void) {
     enableRawMode();
     enableAlternateBuffer();
+
+    Editor editor = initEditor();
 
     printf("Raw mode enabled. Type 'q' to quit.\n");
 
@@ -16,19 +20,15 @@ int main(void) {
 
         if (n == -1 && errno != EAGAIN) {
             perror("read");
-            exit(1);
+	    disableAlternateBuffer();
+	    exit(1);
         }
         if (n == 0) continue; // timeout, no input
-
-        if (c == 'q') break;
-
-        if (c < 32) {
-            printf("%d\n", c);  // control char
-        } else {
-            printf("%c (%d)\n", c, c);
+	
+	handleKeyPress(&editor, c);
         }
-    }
 
+    disableAlternateBuffer();
     return 0;
 }
 
