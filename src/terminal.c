@@ -48,5 +48,21 @@ void disableAlternateBuffer(){
 }
 
 void moveCursor(CursorMovementPosition position){
-
+	switch (position) {
+		case HOME:
+			write(STDOUT_FILENO, "\x1b[H", 3);
+		        break;
+		case UP:
+			write(STDOUT_FILENO, "\x1b[A", 3);
+		        break;
+		case DOWN:
+			write(STDOUT_FILENO, "\x1b[B", 3);
+		        break;
+		case RIGHT:
+			write(STDOUT_FILENO, "\x1b[C", 3);
+		        break;
+		case LEFT:
+			write(STDOUT_FILENO, "\x1b[D", 3);
+		        break;
+	}
 }

@@ -12,10 +12,20 @@ int main(void) {
 
     Editor editor = initEditor();
 
-    printf("Raw mode enabled. Type 'q' to quit.\n");
+    // printf("Raw mode enabled. Type 'q' to quit.\n");
 
     char c;
     while (1) {
+	clearTerminal();
+	moveCursor(HOME);
+	
+	for (int i = 0; i < COLUMN_SIZE; i++) {
+			char *row = editor.buffer[i];
+			if(row){
+				write(STDOUT_FILENO, row, ROW_SIZE);
+				write(STDOUT_FILENO, "\n", 1);
+			}
+	}
 
         int n = read(STDIN_FILENO, &c, 1);
 

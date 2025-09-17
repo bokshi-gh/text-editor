@@ -6,6 +6,6 @@ project(Vimm
 )
 set(CMAKE_C_STANDARD 11)
 include_directories(include)
-add_executable(vimm src/main.c src/terminal.c src/keypress.c src/editor/editor.c)
+add_executable(vimm src/main.c src/terminal.c src/keypress.c src/editor.c)
 install(TARGETS vimm RUNTIME DESTINATION .)
 

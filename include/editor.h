@@ -12,7 +12,7 @@ typedef enum {
 typedef struct {
 	int x;
 	int y;
-	char buffer[ROW_SIZE][COLUMN_SIZE];
+	char *buffer[COLUMN_SIZE];
 	EditorMode mode;
 } Editor;
 
