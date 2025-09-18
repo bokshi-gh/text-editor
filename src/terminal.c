@@ -46,6 +46,8 @@ void clearTerminal(){
 	write(STDOUT_FILENO, "\x1b[2J", 4);
 }
 
-void moveCursorHome(){
-	write(STDOUT_FILENO, "\x1b[H", 3);
+void moveCursor(int row, int column){
+	char *buffer;
+	sprintf(buffer, "\x1b[%d;%dH", row, column);
+	write(STDOUT_FILENO, buffer, sizeof(buffer));
 }

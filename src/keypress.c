@@ -16,21 +16,11 @@ void handleKeyPress(Editor *editor){
 	    exit(1);
         }
         if (n == 0) return; // timeout, no input
-
 	if (c == 'q') {
 		disableAlternateBuffer();
 		exit(EXIT_SUCCESS);
 	}else {
-		if(editor->mode == NORMAL){
-			if(c == 'i') editor->mode = INSERT;
-			if(c == 'k') editor->row--;
-			if(c == 'j') editor->row++;
-			if(c == 'l') editor->column++;
-			if(c == 'h') editor->column--;
-
-		}else if (editor->mode == INSERT) {
-			if(c == 27) editor->mode = NORMAL;
-			else write(STDOUT_FILENO, &c, 1);
-		}
+		if(editor->mode == NORMAL) normalModeHandler(editor, c);
+		else if (editor->mode == INSERT) insertModeHandler(editor, c);
 	}
 }
