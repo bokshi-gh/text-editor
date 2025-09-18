@@ -1,6 +1,7 @@
 #include "unistd.h"
-#include <string.h>
+#include <stdio.h>
 #include "../include/editor.h"
+#include "../include/terminal.h"
 
 Editor initEditor(){
 	Editor editor = { .row = 0, .column = 0, .mode = NORMAL};
@@ -13,6 +14,9 @@ Editor initEditor(){
 }
 
 void renderBuffer(Editor *editor){
+	clearTerminal();
+	moveCursorHome();
+	
 	for (int i = 0; i < COLUMN_SIZE; i++) {
 		char *row = editor->buffer[i];
 		if(row){
@@ -20,4 +24,8 @@ void renderBuffer(Editor *editor){
 			write(STDOUT_FILENO, "\n", 1);
 		}
 	}
+
+	char cursor[100];
+	sprintf(cursor, "\x1b[%d;%dH", editor->row, editor->column);
+	write(STDOUT_FILENO, cursor, 6);
 }

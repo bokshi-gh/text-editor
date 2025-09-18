@@ -2,13 +2,17 @@
 #include <stdlib.h>
 #include <termios.h>
 #include <stdio.h>
-
 #include "../include/terminal.h"
 
 static struct termios orig_termios;
 
-void disableRawMode(void) {
-    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+void enableAlternateBuffer(){
+	write(STDOUT_FILENO, "\x1b[?1049h", 8);
+}
+
+void disableAlternateBuffer(){
+	clearTerminal();
+	write(STDOUT_FILENO, "\x1b[?1049l", 8);
 }
 
 void enableRawMode(void) {
@@ -34,35 +38,14 @@ void enableRawMode(void) {
     }
 }
 
+void disableRawMode(void) {
+    tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
+}
+
 void clearTerminal(){
 	write(STDOUT_FILENO, "\x1b[2J", 4);
 }
 
-void enableAlternateBuffer(){
-	write(STDOUT_FILENO, "\x1b[?1049h", 8);
-}
-
-void disableAlternateBuffer(){
-	clearTerminal();
-	write(STDOUT_FILENO, "\x1b[?1049l", 8);
-}
-
-void moveCursor(CursorMovementPosition position){
-	switch (position) {
-		case HOME:
-			write(STDOUT_FILENO, "\x1b[H", 3);
-		        break;
-		case UP:
-			write(STDOUT_FILENO, "\x1b[A", 3);
-		        break;
-		case DOWN:
-			write(STDOUT_FILENO, "\x1b[B", 3);
-		        break;
-		case RIGHT:
-			write(STDOUT_FILENO, "\x1b[C", 3);
-		        break;
-		case LEFT:
-			write(STDOUT_FILENO, "\x1b[D", 3);
-		        break;
-	}
+void moveCursorHome(){
+	write(STDOUT_FILENO, "\x1b[H", 3);
 }
