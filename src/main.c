@@ -11,8 +11,8 @@ int main(void) {
   Editor editor = initEditor();
 
   while (true) {
-    renderBuffer(&editor);
-    handleKeyPress(&editor);
+		renderBuffer(&editor);
+		handleKeyPress(&editor);
   }
 
   return 0;

@@ -1,4 +1,6 @@
 #pragma once
+#define ROW_SIZE 4096
+#define COLUMN_SIZE 4096
 
 typedef enum {
 	NORMAL,
@@ -10,7 +12,7 @@ typedef enum {
 typedef struct {
 	int row;
 	int column;
-	char *buffer;
+	char buffer[ROW_SIZE][COLUMN_SIZE];
 	EditorMode mode;
 } Editor;
 

@@ -1,3 +1,4 @@
+#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <termios.h>
@@ -8,6 +9,7 @@ static struct termios orig_termios;
 
 void enableAlternateBuffer(){
 	write(STDOUT_FILENO, "\x1b[?1049h", 8);
+	atexit(disableAlternateBuffer);
 }
 
 void disableAlternateBuffer(){
@@ -47,7 +49,7 @@ void clearTerminal(){
 }
 
 void moveCursor(int row, int column){
-	char *buffer;
+	char buffer[32];
 	sprintf(buffer, "\x1b[%d;%dH", row, column);
-	write(STDOUT_FILENO, buffer, sizeof(buffer));
+	write(STDOUT_FILENO, buffer, strlen(buffer));
 }
