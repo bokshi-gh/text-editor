@@ -6,3 +6,4 @@ static struct termios orig;
 
 void enableRawMode();
 void disableRawMode();
+void get_terminal_width
