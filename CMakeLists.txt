@@ -8,7 +8,7 @@ project(Vim--
 set(CMAKE_CXX_STANDARD 17)
 
 include_directories(include)
-add_executable(vim-- src/*)
+add_executable(vim-- src/main.c src/terminal.c src/editor.c)
 
 install(TARGETS vim-- RUNTIME DESTINATION bin)
 install(FILES LICENSE README.md DESTINATION docs)
