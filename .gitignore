@@ -1,4 +1,8 @@
-*.out
+*.un~
+*.swp
 
-/build
-/dist
+*.out
+*.exe
+
+build/
+dist/
