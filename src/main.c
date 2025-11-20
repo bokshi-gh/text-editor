@@ -3,13 +3,24 @@
 #include <unistd.h>
 
 int main(int argc, char *argv[]) {
-	enableRawMode();
+    enter_alternate_screen_buffer();
+    enableRawMode();
 
-	char c;
-	while (c != 'q') {
-		read(STDIN_FILENO, &c, 1);
-		write(STDOUT_FILENO, &c, 1);
-	}
+    char c = 0;
+    while (1) {
+        if (read(STDIN_FILENO, &c, 1) == -1) break;
 
-	return EXIT_SUCCESS;
+        if (c == 'q') {
+            disableRawMode();
+            leave_alternate_screen_buffer();
+            return EXIT_SUCCESS;
+        }
+
+        write(STDOUT_FILENO, &c, 1);
+    }
+
+    disableRawMode();
+    leave_alternate_screen_buffer();
+    return EXIT_SUCCESS;
 }
+
