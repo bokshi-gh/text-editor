@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c99 -Wall -Wextra -O2 -Iinclude
+CFLAGS = -std=c99 -Wall -Wextra -pedantic -O2 -Iinclude
 
 SRC = src/main.c
 OBJ = $(SRC:.c=.o)
