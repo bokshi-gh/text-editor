@@ -1,9 +1,7 @@
-CC      = gcc
+CC = gcc
 CFLAGS = -std=c99 -Wall -Wextra -O2 -Iinclude
 
-SRC = \
-			src/main.c
-
+SRC = src/main.c
 OBJ = $(SRC:.c=.o)
 
 TARGET = cvim
@@ -11,7 +9,7 @@ TARGET = cvim
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+	$(CC) $(CFLAGS) $(OBJ) -o $(TARGET)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
