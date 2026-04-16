@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
   atexit(disable_raw_mode);
 
   while (1) { 
-    refress_screen();
+    refresh_screen();
     process_keypress();
   }
 

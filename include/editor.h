@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-void refress_screen();
+void refresh_screen();
 
 char read_key();
 void process_keypress();
