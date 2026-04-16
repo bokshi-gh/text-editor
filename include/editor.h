@@ -15,6 +15,8 @@ typedef struct {
   int cols;
 } Editor;
 
+void init_editor();
+
 void refresh_screen();
 
 char read_key();

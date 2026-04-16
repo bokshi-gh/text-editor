@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
   while (1) { 
     refresh_screen();
-    process_keypress(&e);
+    process_keypress();
   }
 
   return 0;

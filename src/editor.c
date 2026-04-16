@@ -1,6 +1,6 @@
 #include "editor.h"
 
-Editor e;
+static Editor e;
 
 void init_editor() {
   if (get_window_size(&e.rows, &e.cols) == -1) die("get_window_size");
@@ -34,7 +34,7 @@ char read_key() {
   return c;
 }
 
-void process_keypress(Editor *e) {
+void process_keypress() {
   char c = read_key();
 
   switch (c) {
