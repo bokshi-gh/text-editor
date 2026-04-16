@@ -12,6 +12,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
   int rows;
@@ -20,10 +21,12 @@ typedef struct {
   int cx;
   int cy;
 
-  char *filename;
+  char filename[256];
 } Editor;
 
 void init_editor();
+
+void set_filename(const char *fn);
 
 void refresh_screen();
 

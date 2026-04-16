@@ -7,12 +7,11 @@ void init_editor() {
 
   e.cx = 0;
   e.cy = 0;
-
-  e.filename = NULL;
 }
 
-void set_filename(char *fn) {
-  e.filename = fn;
+void set_filename(const char *fn) {
+  strncpy(e.filename, fn, sizeof(e.filename) - 1);
+  e.filename[sizeof(e.filename) - 1] = '\0';
 }
 
 void draw_rows() {

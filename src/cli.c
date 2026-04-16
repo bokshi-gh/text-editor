@@ -23,6 +23,9 @@ void handle_cli(int argc, char *argv[]) {
       show_help();
     } else  if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0) {
       show_version();
+    } else {
+      set_filename(argv[1]);
+      return;
     }
   } else {
     show_unknown(argv);
