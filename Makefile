@@ -6,6 +6,9 @@ OBJ = $(SRC:.c=.o)
 
 TARGET = cvim
 
+PREFIX = /usr/local
+BINDIR = $(PREFIX)/bin
+
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
@@ -17,4 +20,10 @@ $(TARGET): $(OBJ)
 clean:
 	rm -f $(OBJ) $(TARGET)
 
-.PHONY: all clean
+install: $(TARGET)
+	install -Dm755 $(TARGET) $(BINDIR)/$(TARGET)
+
+uninstall:
+	rm -f $(BINDIR)/$(TARGET)
+
+.PHONY: all clean install uninstall
