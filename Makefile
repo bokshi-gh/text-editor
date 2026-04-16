@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -std=c99 -Wall -Wextra -pedantic -O2 -Iinclude
 
-SRC = src/main.c src/terminal.c
+SRC = src/main.c src/terminal.c src/editor.c src/errors.c
 OBJ = $(SRC:.c=.o)
 
 TARGET = cvim

@@ -1,6 +1,8 @@
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
+#include "errors.h"
+
 #include <termios.h>
 #include <unistd.h>
 
