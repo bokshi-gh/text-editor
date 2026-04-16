@@ -1,13 +1,15 @@
 #include "editor.h"
 
-void init_editor(Editor e) {
+Editor e;
+
+void init_editor() {
   if (get_window_size(&e.rows, &e.cols) == -1) die("get_window_size");
 }
 
 void draw_rows() {
   int y;
 
-  for (y = 0; y < 24; y++) {
+  for (y = 0; y < e.rows; y++) {
     write(STDOUT_FILENO, "~\r\n", 3);
   }
 }
@@ -32,7 +34,7 @@ char read_key() {
   return c;
 }
 
-void process_keypress() {
+void process_keypress(Editor *e) {
   char c = read_key();
 
   switch (c) {

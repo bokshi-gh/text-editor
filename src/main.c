@@ -12,9 +12,11 @@ int main(int argc, char *argv[]) {
   atexit(return_to_main_screen_buffer);
   atexit(disable_raw_mode);
 
+  init_editor();
+
   while (1) { 
     refresh_screen();
-    process_keypress();
+    process_keypress(&e);
   }
 
   return 0;
