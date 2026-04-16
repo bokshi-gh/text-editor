@@ -1,6 +1,9 @@
 #ifndef EDITOR_H
 #define EDITOR_H
 
+#define TARGET "cvim"
+#define VERSION "v0.0.1"
+
 #define CTRL_KEY(k) ((k) & 0x1f)
 
 #include "errors.h"
@@ -13,6 +16,11 @@
 typedef struct {
   int rows;
   int cols;
+
+  int cx;
+  int cy;
+
+  char *filename;
 } Editor;
 
 void init_editor();

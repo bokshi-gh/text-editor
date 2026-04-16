@@ -1,3 +1,4 @@
+#include "cli.h"
 #include "terminal.h"
 #include "editor.h"
 
@@ -5,6 +6,8 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
+  handle_cli(argc, argv);
+
   switch_to_alternate_screen_buffer();
   enable_raw_mode();
 
