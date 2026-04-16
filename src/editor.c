@@ -1,5 +1,9 @@
 #include "editor.h"
 
+void init_editor(Editor e) {
+  if (get_window_size(&e.rows, &e.cols) == -1) die("get_window_size");
+}
+
 void draw_rows() {
   int y;
 

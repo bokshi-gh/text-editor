@@ -10,6 +10,11 @@
 #include <errno.h>
 #include <stdlib.h>
 
+typedef struct {
+  int rows;
+  int cols;
+} Editor;
+
 void refresh_screen();
 
 char read_key();
