@@ -12,7 +12,10 @@ int main(int argc, char *argv[]) {
   atexit(return_to_main_screen_buffer);
   atexit(disable_raw_mode);
 
-  while (1) { process_keypress(); }
+  while (1) { 
+    refress_screen();
+    process_keypress();
+  }
 
   return 0;
 }

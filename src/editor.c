@@ -1,5 +1,10 @@
 #include "editor.h"
 
+void refresh_screen() {
+  clear_entire_screen();
+  move_cursor_to_home();
+}
+
 char read_key() {
   int nread;
   char c;

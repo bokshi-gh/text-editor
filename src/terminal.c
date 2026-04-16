@@ -21,3 +21,6 @@ void enable_raw_mode() {
 }
 
 void disable_raw_mode() { if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1) die("tcsetattr"); }
+
+void clear_entire_screen() { write(STDOUT_FILENO, "\x1b[2J", 4); }
+void move_cursor_to_home() { write(STDOUT_FILENO, "\x1b[H", 3); }

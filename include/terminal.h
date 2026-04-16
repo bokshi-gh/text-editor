@@ -12,4 +12,7 @@ void return_to_main_screen_buffer();
 void enable_raw_mode();
 void disable_raw_mode();
 
+void clear_entire_screen();
+void move_cursor_to_home();
+
 #endif
