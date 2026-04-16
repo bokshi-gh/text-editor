@@ -22,5 +22,17 @@ void enable_raw_mode() {
 
 void disable_raw_mode() { if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios) == -1) die("tcsetattr"); }
 
+int get_window_size(int *rows, int *cols) {
+  struct winsize ws;
+  
+  if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1 || ws.ws_col == 0) {
+    return -1;
+  } else {
+    *cols = ws.ws_col;
+    *rows = ws.ws_row;
+    return 0;
+  }
+} 
+
 void clear_entire_screen() { write(STDOUT_FILENO, "\x1b[2J", 4); }
 void move_cursor_to_home() { write(STDOUT_FILENO, "\x1b[H", 3); }

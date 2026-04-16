@@ -1,6 +1,8 @@
 #ifndef ERRORS_H
 #define ERRORS_H
 
+#include "terminal.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 

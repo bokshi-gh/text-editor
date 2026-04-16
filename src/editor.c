@@ -1,7 +1,19 @@
 #include "editor.h"
 
+void draw_rows() {
+  int y;
+
+  for (y = 0; y < 24; y++) {
+    write(STDOUT_FILENO, "~\r\n", 3);
+  }
+}
+
 void refresh_screen() {
   clear_entire_screen();
+  move_cursor_to_home();
+
+  draw_rows();
+
   move_cursor_to_home();
 }
 
