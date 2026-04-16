@@ -1,7 +1,7 @@
 #include "cli.h"
 
 void show_help() {
-  printf("cvim - a terminal-based text editor\n\n");
+  printf("cvim - a terminal-based text editor inspired by Vim\n\n");
   printf("Usage: %s [OPTIONS | FILE]\n\n", TARGET);
   printf("Options:\n");
   printf(" %s-h%s, %s--help%s \t Show help message\n", ANSI_YELLOW, ANSI_RESET, ANSI_YELLOW, ANSI_RESET);
