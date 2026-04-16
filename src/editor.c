@@ -4,6 +4,15 @@ static Editor e;
 
 void init_editor() {
   if (get_window_size(&e.rows, &e.cols) == -1) die("get_window_size");
+
+  e.cx = 0;
+  e.cy = 0;
+
+  e.filename = NULL;
+}
+
+void set_filename(char *fn) {
+  e.filename = fn;
 }
 
 void draw_rows() {
