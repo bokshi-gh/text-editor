@@ -1,4 +1,5 @@
 #include "terminal.h"
+#include "editor.h"
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -10,6 +11,8 @@ int main(int argc, char *argv[]) {
   // Important: atexit() executes functions in reverse order (LIFO)
   atexit(return_to_main_screen_buffer);
   atexit(disable_raw_mode);
+
+  while (1) { process_keypress(); }
 
   return 0;
 }
