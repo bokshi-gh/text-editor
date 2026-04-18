@@ -11,6 +11,8 @@ void init_editor() {
   e.filename[0] = '\0';
   e.buffer = NULL;
   e.buffer_length = 0;
+
+  e.gutter_width = snprintf(NULL, 0, "%d", e.rows) + 2;
 }
 
 void set_filename(const char *filename) {
@@ -58,11 +60,22 @@ void update_cursor_position(int key) {
   }
 }
 
-void draw_rows() {
-  int y;
+void append_spaces(int n) {
+  for (int i = 0; i < n; i++)
+    buffer_append(" ", 1);
+}
 
-  for (y = 0; y < e.rows; y++) {
-    buffer_append("~", 1);
+void draw_rows() {
+  for (int y = 0; y < e.rows; y++) {
+
+    char buf[32];
+
+    // line number
+    int len = snprintf(buf, sizeof(buf), "%*d ", e.gutter_width - 2, y + 1);
+    buffer_append(buf, len);
+
+    buffer_append("|", 1);   // separator
+    buffer_append(" ", 1);   // spacing
 
     if (y < e.rows - 1) {
       buffer_append("\r\n", 2);

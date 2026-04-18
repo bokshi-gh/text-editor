@@ -50,6 +50,7 @@ typedef struct {
   char filename[256];
   char *buffer;
   int buffer_length;
+  int gutter_width; 
 } Editor;
 
 void init_editor();
