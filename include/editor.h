@@ -22,6 +22,8 @@ typedef struct {
   int cy;
 
   char filename[256];
+  char *buffer;
+  int buffer_length;
 } Editor;
 
 void init_editor();
@@ -30,7 +32,6 @@ void set_filename(const char *fn);
 
 void refresh_screen();
 
-char read_key();
 void process_keypress();
 
 #endif
