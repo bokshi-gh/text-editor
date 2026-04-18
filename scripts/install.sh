@@ -27,4 +27,4 @@ rm -rf "$TMP_DIR"
 
 echo
 echo -e "${GREEN}Installation complete!${RESET}"
-echo -e "Try ${GREEN}'cvim -h'${RESET}"
+echo -e "Run ${GREEN}${TARGET} -h${RESET} to get started."
