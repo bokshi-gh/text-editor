@@ -15,6 +15,13 @@
 #include <string.h>
 
 typedef enum {
+  NORMAL,
+  INSERT,
+  COMMAND,
+  VISUAL
+} EditorMode;
+
+typedef enum {
   NULL = 0,
 
   H = 'h',
