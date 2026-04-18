@@ -23,5 +23,6 @@ int get_window_size(int *rows, int *cols);
 void clear_entire_screen();
 
 void move_cursor_to_home();
+void move_cursor(int cx, int cy);
 
 #endif

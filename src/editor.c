@@ -18,20 +18,29 @@ void set_filename(const char *filename) {
   e.filename[sizeof(e.filename) - 1] = '\0';
 }
 
+void buffer_append(const char *s, int length) {
+  char *new = realloc(e.buffer, e.buffer_length + length);
+
+  if (new == NULL) return;
+  memcpy(&new[e.buffer_length], s, length);
+  e.buffer = new;
+  e.buffer_length += length;
+}
+
+void buffer_free() {
+  free(e.buffer);
+}
+
 void draw_rows() {
   int y;
 
   for (y = 0; y < e.rows; y++) {
-    write(STDOUT_FILENO, "~", 1);
-    
+    buffer_append("~", 1);
+
     if (y < e.rows - 1) {
-      write(STDOUT_FILENO, "\r\n", 2);
+      buffer_append("\r\n", 2);
     }
   }
-}
-
-void buffer_append(const char *s, int length) {
-  char *new = realloc(e.buffer, e.buffer_length + length)
 }
 
 void refresh_screen() {
@@ -40,7 +49,12 @@ void refresh_screen() {
 
   draw_rows();
 
+  move_cursor(e.cx, e.cy);
+
   move_cursor_to_home();
+
+  write(STDOUT_FILENO, e.buffer, e.buffer_length);
+  buffer_free();
 }
 
 char read_key() {

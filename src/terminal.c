@@ -36,3 +36,8 @@ int get_window_size(int *rows, int *cols) {
 
 void clear_entire_screen() { write(STDOUT_FILENO, "\x1b[2J", 4); }
 void move_cursor_to_home() { write(STDOUT_FILENO, "\x1b[H", 3); }
+
+void move_cursor(int cx, int cy) {
+  char buf[32];
+  snprintf(buf, sizeof(buf), "\x1b[%d;%dH", cx + 1, cy + 1);
+}
