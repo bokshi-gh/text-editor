@@ -118,8 +118,8 @@ int read_key() {
       }
     } else if (seq[0] == 'O') {
       switch (seq[1]) {
-        case 'H': return HOME_KEY;
-        case 'F': return END_KEY;
+        case 'H': return HOME;
+        case 'F': return END;
       }
     }
 
@@ -137,6 +137,13 @@ void process_keypress() {
       clear_entire_screen();
       move_cursor_to_home();
       exit(0);
+      break;
+
+    case HOME:
+      e.cx = 0;
+      break;
+    case END:
+      e.cx = e.cols - 1;
       break;
 
     case PAGE_UP:
