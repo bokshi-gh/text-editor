@@ -8,12 +8,13 @@ void init_editor() {
   e.cx = 0;
   e.cy = 0;
 
-  e.filename[0] = '\0';
+  e.gutter_width = snprintf(NULL, 0, "%d", e.rows) + 2;
+
   e.buffer = NULL;
   e.buffer_length = 0;
 
-  e.gutter_width = snprintf(NULL, 0, "%d", e.rows) + 2;
- 
+  e.filename[0] = '\0';
+
   e.row = NULL;
   e.numrows = 0;
 }
@@ -25,6 +26,10 @@ void open_file() {
 void set_filename(const char *filename) {
   strncpy(e.filename, filename, sizeof(e.filename) - 1);
   e.filename[sizeof(e.filename) - 1] = '\0';
+}
+
+void row_append(char *s, size_t length) {
+  e.row.size
 }
 
 void buffer_append(const char *s, int length) {
@@ -79,6 +84,8 @@ void draw_rows() {
     buffer_append("|", 1);   // separator
     buffer_append(" ", 1);   // spacing
 
+    buffer_append("\x1b[K", 3);
+
     if (y < e.rows - 1) {
       buffer_append("\r\n", 2);
     }
@@ -86,7 +93,7 @@ void draw_rows() {
 }
 
 void refresh_screen() {
-  buffer_append("\x1b[2J", 4);   // clear
+  buffer_append("\x1b[?25l", 6);
   buffer_append("\x1b[H", 3);    // home
 
   draw_rows();
@@ -94,6 +101,8 @@ void refresh_screen() {
   char buf[32];
   int len = snprintf(buf, sizeof(buf), "\x1b[%d;%dH", e.cy + 1, e.cx + 1);
   buffer_append(buf, len);
+
+  buffer_append("\x1b[?25h", 6);
 
   write(STDOUT_FILENO, e.buffer, e.buffer_length);
   buffer_free();
