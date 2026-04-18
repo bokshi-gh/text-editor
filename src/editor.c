@@ -33,7 +33,7 @@ void buffer_free() {
   e.buffer_length = 0;
 }
 
-void update_cursor_position(char key) {
+void update_cursor_position(int key) {
   switch (key) {
     case ARROW_LEFT:
       if (e.cx != 0) {
@@ -71,12 +71,14 @@ void draw_rows() {
 }
 
 void refresh_screen() {
-  clear_entire_screen();
-  move_cursor_to_home();
+  buffer_append("\x1b[2J", 4);   // clear
+  buffer_append("\x1b[H", 3);    // home
 
   draw_rows();
 
-  move_cursor(e.cx, e.cy);
+  char buf[32];
+  int len = snprintf(buf, sizeof(buf), "\x1b[%d;%dH", e.cy + 1, e.cx + 1);
+  buffer_append(buf, len);
 
   write(STDOUT_FILENO, e.buffer, e.buffer_length);
   buffer_free();
@@ -130,7 +132,7 @@ int read_key() {
 }
 
 void process_keypress() {
-  char c = read_key();
+  int c = read_key();
 
   switch (c) {
     case CTRL_KEY('q'):

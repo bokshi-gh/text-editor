@@ -22,8 +22,6 @@ typedef enum {
 } EditorMode;
 
 typedef enum {
-  NULL = 0,
-
   ESC,
   TAB = '\t',
   ENTER,

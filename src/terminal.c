@@ -37,7 +37,17 @@ int get_window_size(int *rows, int *cols) {
 void clear_entire_screen() { write(STDOUT_FILENO, "\x1b[2J", 4); }
 void move_cursor_to_home() { write(STDOUT_FILENO, "\x1b[H", 3); }
 
-void move_cursor(int cx, int cy) {
+void move_cursor(int cy, int cx) {
+  /*
+   *  Terminal expects: 
+   *                    ESC[row;colH
+   *  
+   *  (y, x) → (row, column):
+   *    (row, column)
+   *    → row = vertical (down)    → y
+   *    → col = horizontal (right) → x
+  */
   char buf[32];
-  snprintf(buf, sizeof(buf), "\x1b[%d;%dH", cx + 1, cy + 1);
+  int len = snprintf(buf, sizeof(buf), "\x1b[%d;%dH", cy + 1, cx + 1);
+  write(STDOUT_FILENO, buf, len);
 }
