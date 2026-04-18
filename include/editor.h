@@ -14,6 +14,23 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef enum {
+  NULL = 0,
+
+  H = 'h',
+  J = 'j',
+  K = 'k',
+  L = 'l',
+
+  ARROW_UP = 1000,
+  ARROW_DOWN,
+  ARROW_LEFT,
+  ARROW_RIGHT,
+
+  ESC = 27
+  COLON = ':'
+} EditorKey;
+
 typedef struct {
   int rows;
   int cols;

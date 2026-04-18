@@ -31,6 +31,23 @@ void buffer_free() {
   free(e.buffer);
 }
 
+void update_cursor_position(char key) {
+  switch (key) {
+    case 'h':
+      e.cx--;
+      break;
+    case 'l':
+      e.cx++;
+      break;
+    case 'k':
+      e.cy--;
+      break;
+    case 'j':
+      e.cy++;
+      break;
+  }
+}
+
 void draw_rows() {
   int y;
 
@@ -65,6 +82,23 @@ char read_key() {
     if (nread == -1 && errno != EAGAIN) die("read");
   }
 
+  if (c == '\x1b') {
+    char seq[3];
+    if (read(STDIN_FILENO, &seq[0], 1) != 1) return '\x1b';
+    if (read(STDIN_FILENO, &seq[1], 1) != 1) return '\x1b';
+    if (seq[0] == '[') {
+      switch (seq[1]) {
+        case 'A': return 'k';
+        case 'B': return 'j';
+        case 'C': return 'l';
+        case 'D': return 'h';
+      }
+    }
+    return '\x1b';
+  } else {
+    return c;
+  }
+
   return c;
 }
 
@@ -73,7 +107,16 @@ void process_keypress() {
 
   switch (c) {
     case CTRL_KEY('q'):
+      clear_entire_screen();
+      move_cursor_to_home();
       exit(0);
+      break;
+
+    case 'h':
+    case 'j':
+    case 'k':
+    case 'l':
+      update_cursor_position(c);
       break;
   }
 }
