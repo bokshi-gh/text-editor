@@ -33,16 +33,16 @@ void buffer_free() {
 
 void update_cursor_position(char key) {
   switch (key) {
-    case 'h':
+    case ARROW_LEFT:
       e.cx--;
       break;
-    case 'l':
+    case ARROW_RIGHT:
       e.cx++;
       break;
-    case 'k':
+    case ARROW_UP:
       e.cy--;
       break;
-    case 'j':
+    case ARROW_DOWN:
       e.cy++;
       break;
   }
@@ -88,10 +88,10 @@ char read_key() {
     if (read(STDIN_FILENO, &seq[1], 1) != 1) return '\x1b';
     if (seq[0] == '[') {
       switch (seq[1]) {
-        case 'A': return 'k';
-        case 'B': return 'j';
-        case 'C': return 'l';
-        case 'D': return 'h';
+        case 'A': return ARROW_UP;
+        case 'B': return ARROW_DOWN;
+        case 'C': return ARROW_RIGHT;
+        case 'D': return ARROW_LEFT;
       }
     }
     return '\x1b';
@@ -112,10 +112,10 @@ void process_keypress() {
       exit(0);
       break;
 
-    case 'h':
-    case 'j':
-    case 'k':
-    case 'l':
+    case ARROW_LEFT:
+    case ARROW_RIGHT:
+    case ARROW_UP:
+    case ARROW_DOWN:
       update_cursor_position(c);
       break;
   }
