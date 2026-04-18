@@ -34,16 +34,24 @@ void buffer_free() {
 void update_cursor_position(char key) {
   switch (key) {
     case ARROW_LEFT:
-      e.cx--;
+      if (e.cx != 0) {
+        e.cx--;
+      }
       break;
     case ARROW_RIGHT:
-      e.cx++;
+      if (e.cx != e.cols - 1) {
+        e.cx++;
+      }
       break;
     case ARROW_UP:
-      e.cy--;
+      if (e.cy != 0) {
+        e.cy--;
+      }
       break;
     case ARROW_DOWN:
-      e.cy++;
+      if (e.cy != e.rows - 1) {
+        e.cy++;
+      }
       break;
   }
 }
