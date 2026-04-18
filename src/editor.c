@@ -97,8 +97,13 @@ int read_key() {
         if (read(STDIN_FILENO, &seq[2], 1) != 1) return '\x1b';
         if (seq[2] == '~') {
           switch (seq[1]) {
+            case '1': return HOME_KEY;
+            case '4': return END_KEY;
+            case '3': return DELETE;
             case '5': return PAGE_UP;
             case '6': return PAGE_DOWN;
+            case '7': return HOME;
+            case '8': return END;
           }
         }
       } else {
@@ -107,9 +112,17 @@ int read_key() {
           case 'B': return ARROW_DOWN;
           case 'C': return ARROW_RIGHT;
           case 'D': return ARROW_LEFT;
+          case 'H': return HOME;
+          case 'F': return END;
         }
       }
+    } else if (seq[0] == 'O') {
+      switch (seq[1]) {
+        case 'H': return HOME_KEY;
+        case 'F': return END_KEY;
+      }
     }
+
     return '\x1b';
   } else {
     return c;
@@ -125,6 +138,16 @@ void process_keypress() {
       move_cursor_to_home();
       exit(0);
       break;
+
+    case PAGE_UP:
+    case PAGE_DOWN:
+      {
+        int times = e.rows;
+        while (times--)
+          update_cursor_position(c == PAGE_UP ? ARROW_UP : ARROW_DOWN);
+      }
+      break;
+
 
     case ARROW_LEFT:
     case ARROW_RIGHT:

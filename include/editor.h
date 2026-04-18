@@ -25,21 +25,21 @@ typedef enum {
   NULL = 0,
 
   ESC,
-  TAB,
+  TAB = '\t',
   ENTER,
-  BACKSPACE,
+  BACKSPACE = 127,
   DELETE,
-
-  ARROW_UP = 1000,
-  ARROW_DOWN,
-  ARROW_LEFT,
-  ARROW_RIGHT,
+  
+  HOME,
+  END,
 
   PAGE_UP,
   PAGE_DOWN,
 
-  HOME,
-  END
+  ARROW_UP = 1000,
+  ARROW_DOWN,
+  ARROW_LEFT,
+  ARROW_RIGHT
 } EditorKey;
 
 typedef struct {
