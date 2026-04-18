@@ -28,7 +28,7 @@ typedef struct {
 
 void init_editor();
 
-void set_filename(const char *fn);
+void set_filename(const char *filename);
 
 void refresh_screen();
 

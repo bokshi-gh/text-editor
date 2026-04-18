@@ -7,10 +7,14 @@ void init_editor() {
 
   e.cx = 0;
   e.cy = 0;
+
+  e.filename[0] = '\0';
+  e.buffer = NULL;
+  e.buffer_length = 0;
 }
 
-void set_filename(const char *fn) {
-  strncpy(e.filename, fn, sizeof(e.filename) - 1);
+void set_filename(const char *filename) {
+  strncpy(e.filename, filename, sizeof(e.filename) - 1);
   e.filename[sizeof(e.filename) - 1] = '\0';
 }
 
@@ -24,6 +28,10 @@ void draw_rows() {
       write(STDOUT_FILENO, "\r\n", 2);
     }
   }
+}
+
+void buffer_append(const char *s, int length) {
+  char *new = realloc(e.buffer, e.buffer_length + length)
 }
 
 void refresh_screen() {
