@@ -13,6 +13,13 @@ void init_editor() {
   e.buffer_length = 0;
 
   e.gutter_width = snprintf(NULL, 0, "%d", e.rows) + 2;
+ 
+  e.row = NULL;
+  e.numrows = 0;
+}
+
+void open_file() {
+  
 }
 
 void set_filename(const char *filename) {

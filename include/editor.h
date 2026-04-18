@@ -41,16 +41,26 @@ typedef enum {
 } EditorKey;
 
 typedef struct {
+  int size;
+  char *chars;
+} Row;
+
+typedef struct {
   int rows;
   int cols;
 
-  int cx;
   int cy;
+  int cx;
 
-  char filename[256];
+  int gutter_width;
+
   char *buffer;
   int buffer_length;
-  int gutter_width; 
+
+  char filename[256];
+
+  int numrows;
+  Row *row;
 } Editor;
 
 void init_editor();
