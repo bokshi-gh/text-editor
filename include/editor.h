@@ -24,18 +24,22 @@ typedef enum {
 typedef enum {
   NULL = 0,
 
-  H = 'h',
-  J = 'j',
-  K = 'k',
-  L = 'l',
+  ESC,
+  TAB,
+  ENTER,
+  BACKSPACE,
+  DELETE,
 
   ARROW_UP = 1000,
   ARROW_DOWN,
   ARROW_LEFT,
   ARROW_RIGHT,
 
-  ESC = 27
-  COLON = ':'
+  PAGE_UP,
+  PAGE_DOWN,
+
+  HOME,
+  END
 } EditorKey;
 
 typedef struct {
