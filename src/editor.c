@@ -60,11 +60,6 @@ void update_cursor_position(int key) {
   }
 }
 
-void append_spaces(int n) {
-  for (int i = 0; i < n; i++)
-    buffer_append(" ", 1);
-}
-
 void draw_rows() {
   for (int y = 0; y < e.rows; y++) {
 
