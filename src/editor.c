@@ -29,6 +29,8 @@ void buffer_append(const char *s, int length) {
 
 void buffer_free() {
   free(e.buffer);
+  e.buffer = NULL;
+  e.buffer_length = 0;
 }
 
 void update_cursor_position(char key) {
@@ -76,8 +78,6 @@ void refresh_screen() {
 
   move_cursor(e.cx, e.cy);
 
-  move_cursor_to_home();
-
   write(STDOUT_FILENO, e.buffer, e.buffer_length);
   buffer_free();
 }
@@ -97,8 +97,8 @@ int read_key() {
         if (read(STDIN_FILENO, &seq[2], 1) != 1) return '\x1b';
         if (seq[2] == '~') {
           switch (seq[1]) {
-            case '1': return HOME_KEY;
-            case '4': return END_KEY;
+            case '1': return HOME;
+            case '4': return END;
             case '3': return DELETE;
             case '5': return PAGE_UP;
             case '6': return PAGE_DOWN;
